@@ -28,5 +28,8 @@
     "@semantic-release/release-notes-generator": "^10.0.3",
     "conventional-changelog-conventionalcommits": "^4.6.3",
     "semantic-release": "^19.0.2"
+  },
+  "devDependencies": {
+    "semantic-release-maven": "^1.1.5"
   }
 }
