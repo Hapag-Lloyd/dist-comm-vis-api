@@ -20,6 +20,7 @@ verifyConditions:
   - '@semantic-release/git'
   - '@semantic-release/github'
   - '@semantic-release/changelog'
+  - 'semantic-release-maven'
 
 analyzeCommits:
   - path: "@semantic-release/commit-analyzer"
@@ -100,8 +101,10 @@ prepare:
   - path: "@semantic-release/git"
   - path: "@semantic-release/changelog"
     changelogFile: "CHANGELOG.md"
+  - path: "semantic-release-maven"
 
 publish:
+  - path: "semantic-release-maven"
   - path: "@semantic-release/github"
     assets:
       - path: "CHANGELOG.md"
