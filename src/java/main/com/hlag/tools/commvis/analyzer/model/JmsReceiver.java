@@ -12,7 +12,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode
-public class JmsReciever implements ISenderReceiverCommunication {
+public class JmsReceiver implements ISenderReceiverCommunication {
     private String className;
     // e.g. "javax.jms.Queue"
     private String destinationType;

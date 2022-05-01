@@ -7,5 +7,5 @@ public abstract class AbstractCommunicationModelVisitor {
     public abstract void visit(CommunicationModel model);
 
     public abstract void visit(HttpReceiver httpReceiver);
-    public abstract void visit(JmsReciever jmsReceiver);
+    public abstract void visit(JmsReceiver jmsReceiver);
 }
