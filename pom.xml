@@ -5,7 +5,7 @@
 
     <groupId>com.hlag.tools.commvis</groupId>
     <artifactId>api</artifactId>
-    <version>0.0.1-NSAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
     <name>Distributed Communication Visualizer: API</name>
     <description>Library containing the API to enhance the analyzer by user defined components.</description>
     <url>https://github.com/Hapag-Lloyd/dist-comm-vis-api</url>
