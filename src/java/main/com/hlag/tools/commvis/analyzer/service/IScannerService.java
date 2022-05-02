@@ -1,5 +1,6 @@
 package com.hlag.tools.commvis.analyzer.service;
 
+import com.hlag.tools.commvis.analyzer.annotation.VisualizeHttpsCall;
 import com.hlag.tools.commvis.analyzer.model.ISenderReceiverCommunication;
 
 import java.util.Collection;
