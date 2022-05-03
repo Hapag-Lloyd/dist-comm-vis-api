@@ -17,9 +17,9 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface VisualizeHttpsCall {
     /**
-     * @return the method used to call path.
+     * @return the method used to call path, e.g. GET, POST, ...
      */
-    HttpMethod method();
+    String method();
 
     /**
      * @return the path called, e.g. "/customer/{id}"
