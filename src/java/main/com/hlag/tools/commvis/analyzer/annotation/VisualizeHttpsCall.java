@@ -1,6 +1,5 @@
 package com.hlag.tools.commvis.analyzer.annotation;
 
-import javax.ws.rs.HttpMethod;
 import java.lang.annotation.*;
 
 /**
@@ -19,7 +18,7 @@ public @interface VisualizeHttpsCall {
     /**
      * @return the method used to call path, e.g. GET, POST, ...
      */
-    String method();
+    String type();
 
     /**
      * @return the path called, e.g. "/customer/{id}"
