@@ -28,3 +28,14 @@ public class MyUserDefinedScanner implements IScannerService {
     }
 }
 ```
+
+## Annotate Producer Methods
+Scanning consumers (like http(s) endpoints or JMS receivers) is simple, but detecting the producers
+(e.g. methods calling a http(s) endpoint) is much harder or even impossible. To solve this problem a
+special annotation is provided:
+- `@VisualizeHttpsCall(type="GET", path="/customer/{customerId}", projectId="1234", projectName="Customer Service")`
+
+Note 1: The `projectName` is optional and might be nice to see in the code.
+
+Note 2: There is always an annotation of the same name but ending in `s` (e.g. `@VisualizeHttpsCalls`) in case you need
+to place more than one annotation on the method.

@@ -6,6 +6,8 @@ package com.hlag.tools.commvis.analyzer.model;
 public abstract class AbstractCommunicationModelVisitor {
     public abstract void visit(CommunicationModel model);
 
-    public abstract void visit(HttpReceiver httpReceiver);
+    public abstract void visit(HttpConsumer httpReceiver);
+    public abstract void visit(HttpProducer httpReceiver);
+
     public abstract void visit(JmsReceiver jmsReceiver);
 }
