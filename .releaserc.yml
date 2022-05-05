@@ -58,11 +58,8 @@ generateNotes:
   - path: "@semantic-release/release-notes-generator"
     writerOpts:
       groupBy: "type"
-      commitGroupsSort:
-        - "feat"
-        - "perf"
-        - "fix"
       commitsSort: "header"
+      commitGroupsSort: 'title'
     linkCompare: true
     linkReferences: true
     types:
