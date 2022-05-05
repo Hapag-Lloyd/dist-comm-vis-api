@@ -14,9 +14,7 @@ plugins:
   - "@semantic-release/git"
   - "@semantic-release/github"
   - "@semantic-release/exec"
-  - - "semantic-release-maven"
-    - profiles:
-      - release
+  - "semantic-release-maven"
 
 
 verifyConditions:
@@ -102,11 +100,11 @@ prepare:
   - path: "@semantic-release/changelog"
     changelogFile: "CHANGELOG.md"
   - path: "semantic-release-maven"
-    profiles:
-      - release
 
 publish:
   - path: "semantic-release-maven"
+    profiles:
+      - release
   - path: "@semantic-release/github"
     assets:
       - path: "CHANGELOG.md"
