@@ -16,7 +16,6 @@ plugins:
   - "@semantic-release/exec"
   - "semantic-release-maven"
 
-
 verifyConditions:
   - '@semantic-release/git'
   - '@semantic-release/github'
