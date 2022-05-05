@@ -14,8 +14,8 @@ plugins:
   - "@semantic-release/git"
   - "@semantic-release/github"
   - "@semantic-release/exec"
-  - "semantic-release-maven"
-    profiles:
+  - "semantic-release-maven":
+    - profiles:
       - release
 
 
