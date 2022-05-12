@@ -1,29 +1,27 @@
 package com.hlag.tools.commvis.analyzer.model;
 
 import com.google.gson.annotations.SerializedName;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 /**
  * A receiver for JMS messages.
  */
-@AllArgsConstructor
-@Getter
-@ToString
-@EqualsAndHashCode
+@Value
+@RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 public class JmsReceiver implements ISenderReceiverCommunication {
     @SerializedName(value="class_name")
-    private String className;
+    String className;
 
     // e.g. "javax.jms.Queue"
     @SerializedName(value="destination_type")
-    private String destinationType;
+    String destinationType;
 
     // e.g. "jms/catalogs/customer"
     @SerializedName(value="destination")
-    private String destination;
+    String destination;
+
+    @SerializedName(value="id")
+    Long id;
 
     @Override
     public void visit(AbstractCommunicationModelVisitor visitor) {

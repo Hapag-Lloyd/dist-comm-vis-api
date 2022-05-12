@@ -7,16 +7,20 @@ import lombok.*;
  * An endpoint which can receive http(s) messages. Typically, a REST API.
  */
 @Value
+@RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 public class HttpConsumer implements ISenderReceiverCommunication {
     @SerializedName(value="class_name")
-    private final String className;
+    String className;
     @SerializedName(value="method_name")
-    private final String methodName;
+    String methodName;
 
     @SerializedName(value="type")
-    private final String type;
+    String type;
     @SerializedName(value="path")
-    private final String path;
+    String path;
+
+    @SerializedName(value="id")
+    Long id;
 
     @Override
     public void visit(AbstractCommunicationModelVisitor visitor) {
