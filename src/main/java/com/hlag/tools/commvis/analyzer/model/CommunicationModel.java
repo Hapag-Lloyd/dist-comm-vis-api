@@ -21,11 +21,13 @@ public class CommunicationModel {
      * Identifier for the current project, e.g. gitlab project id
      */
     @SerializedName(value="project_id")
+
     private String projectId;
 
     /**
      * A name for the project. Just for information.
      */
+
     @SerializedName(value="project_name")
     private String projectName;
 
@@ -44,8 +46,10 @@ public class CommunicationModel {
     /**
      * All JMS receivers.
      */
+
     @SerializedName(value="jms_consumers")
     private Collection<ISenderReceiverCommunication> jmsConsumers;
+
 
     public void visit(AbstractCommunicationModelVisitor visitor) {
         visitor.visit(this);
