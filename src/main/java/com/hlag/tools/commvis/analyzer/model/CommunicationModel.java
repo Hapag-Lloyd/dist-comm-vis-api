@@ -15,7 +15,6 @@ import java.util.HashSet;
  * The model is built by various services implementing the {@link com.hlag.tools.commvis.analyzer.service.IScannerService}
  * interface.
  */
-@Getter
 @RequiredArgsConstructor
 @ToString
 public class CommunicationModel {
@@ -38,29 +37,29 @@ public class CommunicationModel {
      * All HTTP receiver endpoints.
      */
     @SerializedName(value="http_consumers")
-    private Collection<HttpConsumer> httpConsumers = new HashSet<>();
+    private Collection<ISenderReceiverCommunication> httpConsumers = new HashSet<>();
 
     /**
      * All HTTP producers.
      */
     @SerializedName(value="http_producers")
-    private Collection<HttpProducer> httpProducers = new HashSet<>();
+    private Collection<ISenderReceiverCommunication> httpProducers = new HashSet<>();
 
     /**
      * All JMS receivers.
      */
     @SerializedName(value="jms_consumers")
-    private Collection<JmsReceiver> jmsConsumers = new HashSet<>();
+    private Collection<ISenderReceiverCommunication> jmsConsumers = new HashSet<>();
 
-    public void addHttpConsumer(HttpConsumer consumer) {
+    public void addHttpConsumer(ISenderReceiverCommunication consumer) {
         httpConsumers.add(consumer);
     }
 
-    public void addHttpProducer(HttpProducer producer) {
+    public void addHttpProducer(ISenderReceiverCommunication producer) {
         httpProducers.add(producer);
     }
 
-    public void addJmsConsumer(JmsReceiver consumer) {
+    public void addJmsConsumer(ISenderReceiverCommunication consumer) {
         jmsConsumers.add(consumer);
     }
 
