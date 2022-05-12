@@ -11,13 +11,13 @@ public class HttpProducer implements ISenderReceiverCommunication {
     /**
      * The full qualified classname where the producer lives.
      */
-    @SerializedName(value="className")
+    @SerializedName(value="class_name")
     private final String className;
 
     /**
      * The method name of the producer.
      */
-    @SerializedName(value="methodName")
+    @SerializedName(value="method_name")
     private final String methodName;
 
     /**
@@ -35,7 +35,7 @@ public class HttpProducer implements ISenderReceiverCommunication {
     /**
      * The project id of the referenced project.
      */
-    @SerializedName(value="destinationProjectId")
+    @SerializedName(value="destination_project_id")
     private final String destinationProjectId;
 
     @Override

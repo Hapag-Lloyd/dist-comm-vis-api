@@ -14,11 +14,11 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 public class JmsReceiver implements ISenderReceiverCommunication {
-    @SerializedName(value="className")
+    @SerializedName(value="class_name")
     private String className;
 
     // e.g. "javax.jms.Queue"
-    @SerializedName(value="destinationType")
+    @SerializedName(value="destination_type")
     private String destinationType;
 
     // e.g. "jms/catalogs/customer"
