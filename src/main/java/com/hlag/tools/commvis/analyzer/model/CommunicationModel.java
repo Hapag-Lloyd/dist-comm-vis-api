@@ -27,6 +27,7 @@ public class CommunicationModel {
     /**
      * A name for the project. Just for information.
      */
+    @Getter
     @SerializedName(value="project_name")
     private final String projectName;
 
