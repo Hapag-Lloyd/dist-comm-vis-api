@@ -21,6 +21,7 @@ public class CommunicationModel {
     /**
      * Identifier for the current project, e.g. gitlab project id
      */
+    @Getter
     @SerializedName(value="project_id")
     private final String projectId;
 
