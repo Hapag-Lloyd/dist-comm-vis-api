@@ -8,9 +8,9 @@ import lombok.*;
  */
 @Value
 public class HttpConsumer implements ISenderReceiverCommunication {
-    @SerializedName(value="className")
+    @SerializedName(value="class_name")
     private final String className;
-    @SerializedName(value="methodName")
+    @SerializedName(value="method_name")
     private final String methodName;
 
     @SerializedName(value="type")

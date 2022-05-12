@@ -20,24 +20,38 @@ public class CommunicationModel {
     /**
      * Identifier for the current project, e.g. gitlab project id
      */
-    @SerializedName(value="projectId")
+    @SerializedName(value="project_id")
     private String projectId;
 
     /**
      * A name for the project. Just for information.
      */
-    @SerializedName(value="projectName")
+    @SerializedName(value="project_name")
     private String projectName;
 
     /**
-     * All sender and receiver endpoints found.
+     * All HTTP receiver endpoints.
      */
-    @SerializedName(value="endpoints")
-    private Collection<ISenderReceiverCommunication> endpoints;
+    @SerializedName(value="http_consumers")
+    private Collection<ISenderReceiverCommunication> httpConsumers;
+
+    /**
+     * All HTTP producers.
+     */
+    @SerializedName(value="http_producers")
+    private Collection<ISenderReceiverCommunication> httpProducers;
+
+    /**
+     * All JMS receivers.
+     */
+    @SerializedName(value="jms_consumers")
+    private Collection<ISenderReceiverCommunication> jmsConsumers;
 
     public void visit(AbstractCommunicationModelVisitor visitor) {
         visitor.visit(this);
 
-        endpoints.forEach(e -> e.visit(visitor));
+        httpConsumers.forEach(e -> e.visit(visitor));
+        httpProducers.forEach(e -> e.visit(visitor));
+        jmsConsumers.forEach(e -> e.visit(visitor));
     }
 }
