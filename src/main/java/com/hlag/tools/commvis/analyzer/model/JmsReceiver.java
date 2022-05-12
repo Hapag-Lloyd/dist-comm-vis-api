@@ -1,5 +1,6 @@
 package com.hlag.tools.commvis.analyzer.model;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -13,10 +14,15 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 public class JmsReceiver implements ISenderReceiverCommunication {
+    @SerializedName(value="className")
     private String className;
+
     // e.g. "javax.jms.Queue"
+    @SerializedName(value="destinationType")
     private String destinationType;
+
     // e.g. "jms/catalogs/customer"
+    @SerializedName(value="destination")
     private String destination;
 
     @Override

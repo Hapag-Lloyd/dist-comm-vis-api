@@ -1,5 +1,6 @@
 package com.hlag.tools.commvis.analyzer.model;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
@@ -19,14 +20,19 @@ public class CommunicationModel {
     /**
      * Identifier for the current project, e.g. gitlab project id
      */
+    @SerializedName(value="projectId")
     private String projectId;
+
     /**
      * A name for the project. Just for information.
      */
+    @SerializedName(value="projectName")
     private String projectName;
+
     /**
      * All sender and receiver endpoints found.
      */
+    @SerializedName(value="endpoints")
     private Collection<ISenderReceiverCommunication> endpoints;
 
     public void visit(AbstractCommunicationModelVisitor visitor) {
