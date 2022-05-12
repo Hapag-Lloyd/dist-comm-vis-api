@@ -51,16 +51,16 @@ public class CommunicationModel {
     @SerializedName(value="jms_consumers")
     private Collection<ISenderReceiverCommunication> jmsConsumers = new HashSet<>();
 
-    public void addHttpConsumer(ISenderReceiverCommunication consumer) {
-        httpConsumers.add(consumer);
-    }
-
-    public void addHttpProducer(ISenderReceiverCommunication producer) {
-        httpProducers.add(producer);
-    }
-
-    public void addJmsConsumer(ISenderReceiverCommunication consumer) {
-        jmsConsumers.add(consumer);
+    public <T extends ISenderReceiverCommunication> void addSenderReceiver(T endpoint) {
+        if (endpoint instanceof HttpConsumer) {
+            httpConsumers.add(endpoint);
+        } else if (endpoint instanceof HttpProducer) {
+            httpProducers.add(endpoint);
+        } else if (endpoint instanceof JmsReceiver) {
+            jmsConsumers.add(endpoint);
+        } else {
+            throw new IllegalStateException(String.format("We have no endpoints of type %s", endpoint.getClass().getCanonicalName()));
+        }
     }
 
     public void visit(AbstractCommunicationModelVisitor visitor) {
