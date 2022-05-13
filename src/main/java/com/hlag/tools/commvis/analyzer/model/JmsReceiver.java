@@ -3,6 +3,8 @@ package com.hlag.tools.commvis.analyzer.model;
 import com.google.gson.annotations.SerializedName;
 import lombok.*;
 
+import java.util.UUID;
+
 /**
  * A receiver for JMS messages.
  */
@@ -21,7 +23,7 @@ public class JmsReceiver implements ISenderReceiverCommunication {
     String destination;
 
     @SerializedName(value="id")
-    Long id;
+    UUID id = UUID.randomUUID();
 
     @Override
     public void visit(AbstractCommunicationModelVisitor visitor) {

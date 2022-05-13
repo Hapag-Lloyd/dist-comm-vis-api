@@ -3,6 +3,8 @@ package com.hlag.tools.commvis.analyzer.model;
 import com.google.gson.annotations.SerializedName;
 import lombok.*;
 
+import java.util.UUID;
+
 /**
  * An endpoint which can receive http(s) messages. Typically, a REST API.
  */
@@ -20,7 +22,7 @@ public class HttpConsumer implements ISenderReceiverCommunication {
     String path;
 
     @SerializedName(value="id")
-    Long id;
+    UUID id = UUID.randomUUID();
 
     @Override
     public void visit(AbstractCommunicationModelVisitor visitor) {

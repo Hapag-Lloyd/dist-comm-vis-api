@@ -3,6 +3,8 @@ package com.hlag.tools.commvis.analyzer.model;
 import com.google.gson.annotations.SerializedName;
 import lombok.*;
 
+import java.util.UUID;
+
 /**
  * Holds the data of one method calling a http(s) endpoint.
  */
@@ -40,7 +42,7 @@ public class HttpProducer implements ISenderReceiverCommunication {
     String destinationProjectId;
 
     @SerializedName(value="id")
-    private Long id;
+    UUID id = UUID.randomUUID();
 
     @Override
     public void visit(AbstractCommunicationModelVisitor visitor) {
