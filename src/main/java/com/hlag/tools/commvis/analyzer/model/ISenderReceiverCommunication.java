@@ -1,13 +1,15 @@
 package com.hlag.tools.commvis.analyzer.model;
 
+import java.util.UUID;
+
 /**
  * The top level interface for all producers and consumers or senders and receivers.
  */
 public interface ISenderReceiverCommunication {
     /**
-     * @return an identifier valid within a model
+     * @return an identifier for the object. Globally unique.
      */
-    Long getId();
+    UUID getId();
 
     void visit(AbstractCommunicationModelVisitor visitor);
 }
