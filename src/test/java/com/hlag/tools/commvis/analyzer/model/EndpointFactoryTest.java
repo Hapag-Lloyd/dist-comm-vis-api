@@ -60,7 +60,7 @@ class EndpointFactoryTest {
 
     @Test
     void shouldSetAllFields_whenCreateSqsReceiver() {
-        SqsConsumer actualSqsConsumer = factory.createSqsReceiver("className", "methodName", "queueNAme");
+        SqsConsumer actualSqsConsumer = factory.createSqsReceiver("className", "methodName", "queueName");
 
         Assertions.assertThat(actualSqsConsumer.getClassName()).isEqualTo("className");
         Assertions.assertThat(actualSqsConsumer.getMethodName()).isEqualTo("methodName");

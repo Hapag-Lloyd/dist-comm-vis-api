@@ -39,3 +39,7 @@ Note 1: The `projectName` is optional and might be nice to see in the code.
 
 Note 2: There is always an annotation of the same name but ending in `s` (e.g. `@VisualizeHttpsCalls`) in case you need
 to place more than one annotation on the method.
+
+## Annotate Consumer Methods
+
+- `VisualizeSqsConsumer(queueName="location_sync", projectName="master data")`
