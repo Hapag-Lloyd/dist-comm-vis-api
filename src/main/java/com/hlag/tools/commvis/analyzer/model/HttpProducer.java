@@ -42,7 +42,7 @@ public class HttpProducer implements ISenderReceiverCommunication {
     String destinationProjectId;
 
     @SerializedName(value="id")
-    UUID id = UUID.randomUUID();
+    String id;
 
     @Override
     public void visit(AbstractCommunicationModelVisitor visitor) {

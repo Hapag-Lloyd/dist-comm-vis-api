@@ -22,7 +22,7 @@ public class HttpConsumer implements ISenderReceiverCommunication {
     String path;
 
     @SerializedName(value="id")
-    UUID id = UUID.randomUUID();
+    String id;
 
     @Override
     public void visit(AbstractCommunicationModelVisitor visitor) {
