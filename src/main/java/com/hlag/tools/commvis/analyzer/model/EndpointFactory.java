@@ -20,4 +20,8 @@ public class EndpointFactory {
     public JmsReceiver createJmsReceiver(String className, String destinationType, String destination) {
         return new JmsReceiver(className, destinationType, destination, identityGenerator.generateUniqueId());
     }
+
+    public SqsConsumer createSqsReceiver(String className, String methodName, String queueName) {
+        return new SqsConsumer(className, methodName, queueName, identityGenerator.generateUniqueId());
+    }
 }
