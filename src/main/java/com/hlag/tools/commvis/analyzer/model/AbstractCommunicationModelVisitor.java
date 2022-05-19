@@ -10,4 +10,6 @@ public abstract class AbstractCommunicationModelVisitor {
     public abstract void visit(HttpProducer httpReceiver);
 
     public abstract void visit(JmsReceiver jmsReceiver);
+
+    public abstract void visit(SqsConsumer sqsConsumer);
 }

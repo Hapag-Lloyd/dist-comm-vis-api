@@ -49,7 +49,7 @@ class EndpointFactoryTest {
     }
 
     @Test
-    void createJmsReceiver() {
+    void shouldSetAllFields_whenCreateJmsReceiver() {
         JmsReceiver actualJmsReceiver = factory.createJmsReceiver("className", "destinationType", "destination");
 
         Assertions.assertThat(actualJmsReceiver.getClassName()).isEqualTo("className");
@@ -57,4 +57,15 @@ class EndpointFactoryTest {
         Assertions.assertThat(actualJmsReceiver.getDestination()).isEqualTo("destination");
         Assertions.assertThat(actualJmsReceiver.getId()).isEqualTo(FIXED_ID);
     }
+
+    @Test
+    void shouldSetAllFields_whenCreateSqsReceiver() {
+        SqsConsumer actualSqsConsumer = factory.createSqsReceiver("className", "methodName", "queueName");
+
+        Assertions.assertThat(actualSqsConsumer.getClassName()).isEqualTo("className");
+        Assertions.assertThat(actualSqsConsumer.getMethodName()).isEqualTo("methodName");
+        Assertions.assertThat(actualSqsConsumer.getQueueName()).isEqualTo("queueName");
+        Assertions.assertThat(actualSqsConsumer.getId()).isEqualTo(FIXED_ID);
+    }
+
 }
