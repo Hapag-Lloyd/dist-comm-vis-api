@@ -1,14 +1,16 @@
 package com.hlag.tools.commvis.analyzer.model;
 
 import com.google.gson.annotations.SerializedName;
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 import java.util.Collection;
 import java.util.HashSet;
 
 /**
  * Base class for the entire communication model, e.g. senders and receivers.
- *
+ * <p>
  * The model is built by various services implementing the {@link com.hlag.tools.commvis.analyzer.service.IScannerService}
  * interface.
  */
@@ -19,36 +21,42 @@ public class CommunicationModel {
      * Identifier for the current project, e.g. gitlab project id
      */
     @Getter
-    @SerializedName(value="project_id")
+    @SerializedName(value = "project_id")
     private final String projectId;
 
     /**
      * A name for the project. Just for information.
      */
     @Getter
-    @SerializedName(value="project_name")
+    @SerializedName(value = "project_name")
     private final String projectName;
 
-    @SerializedName(value="model_version")
+    @SerializedName(value = "model_version")
     private final String modelVersion;
 
     /**
-     * All HTTP receiver endpoints.
+     * All HTTP consumers.
      */
-    @SerializedName(value="http_consumers")
+    @SerializedName(value = "http_consumers")
     private Collection<HttpConsumer> httpConsumers = new HashSet<>();
 
     /**
      * All HTTP producers.
      */
-    @SerializedName(value="http_producers")
+    @SerializedName(value = "http_producers")
     private Collection<HttpProducer> httpProducers = new HashSet<>();
 
     /**
-     * All JMS receivers.
+     * All JMS consumers.
      */
-    @SerializedName(value="jms_consumers")
+    @SerializedName(value = "jms_consumers")
     private Collection<JmsReceiver> jmsConsumers = new HashSet<>();
+
+    /**
+     * All SQS consumers.
+     */
+    @SerializedName(value = "sqs_consumers")
+    private Collection<SqsConsumer> sqsConsumers = new HashSet<>();
 
     private CommunicationModel() {
         // for GSON deserialize
@@ -64,6 +72,8 @@ public class CommunicationModel {
             httpProducers.add((HttpProducer) endpoint);
         } else if (endpoint instanceof JmsReceiver) {
             jmsConsumers.add((JmsReceiver) endpoint);
+        } else if (endpoint instanceof SqsConsumer) {
+            sqsConsumers.add((SqsConsumer) endpoint);
         } else {
             throw new IllegalStateException(String.format("We have no endpoints of type %s", endpoint.getClass().getCanonicalName()));
         }
@@ -75,5 +85,6 @@ public class CommunicationModel {
         httpConsumers.forEach(e -> e.visit(visitor));
         httpProducers.forEach(e -> e.visit(visitor));
         jmsConsumers.forEach(e -> e.visit(visitor));
+        sqsConsumers.forEach(e -> e.visit(visitor));
     }
 }
