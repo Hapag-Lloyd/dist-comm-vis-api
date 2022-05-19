@@ -24,6 +24,15 @@ public class HttpConsumer implements ISenderReceiverCommunication {
     @SerializedName(value="id")
     String id;
 
+    /**
+     *
+     * @param producer the producer tested
+     * @return {@code true} if this consumer is receives messages from the {@code producer}.
+     */
+    public boolean isProducedBy(HttpProducer producer) {
+        return type.equals(producer.getType()) && path.equals(producer.getPath());
+    }
+
     @Override
     public void visit(AbstractCommunicationModelVisitor visitor) {
         visitor.visit(this);
