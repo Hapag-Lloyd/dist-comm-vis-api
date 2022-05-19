@@ -9,7 +9,7 @@ public interface ISenderReceiverCommunication {
     /**
      * @return an identifier for the object. Globally unique.
      */
-    UUID getId();
+    String getId();
 
     void visit(AbstractCommunicationModelVisitor visitor);
 }

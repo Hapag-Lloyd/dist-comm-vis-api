@@ -23,7 +23,7 @@ public class JmsReceiver implements ISenderReceiverCommunication {
     String destination;
 
     @SerializedName(value="id")
-    UUID id = UUID.randomUUID();
+    String id;
 
     @Override
     public void visit(AbstractCommunicationModelVisitor visitor) {

@@ -1,21 +1,23 @@
 package com.hlag.tools.commvis.analyzer.model;
 
-public class EndpointFactory {
-    private static final EndpointFactory singleton = new EndpointFactory();
+import com.hlag.tools.commvis.analyzer.port.IIdentityGenerator;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
-    public static EndpointFactory get() {
-        return singleton;
-    }
+@Component
+@RequiredArgsConstructor
+public class EndpointFactory {
+    private final IIdentityGenerator identityGenerator;
 
     public HttpConsumer createHttpConsumer(String className, String methodName, String type, String path) {
-        return new HttpConsumer(className, methodName, type, path);
+        return new HttpConsumer(className, methodName, type, path, identityGenerator.generateUniqueId());
     }
 
     public HttpProducer createHttpProducer(String className, String methodName, String type, String path, String destinationProjectId) {
-        return new HttpProducer(className, methodName, type, path, destinationProjectId);
+        return new HttpProducer(className, methodName, type, path, destinationProjectId, identityGenerator.generateUniqueId());
     }
 
     public JmsReceiver createJmsReceiver(String className, String destinationType, String destination) {
-        return new JmsReceiver(className, destinationType, destination);
+        return new JmsReceiver(className, destinationType, destination, identityGenerator.generateUniqueId());
     }
 }
