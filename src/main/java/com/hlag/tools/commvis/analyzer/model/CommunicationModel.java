@@ -17,6 +17,8 @@ import java.util.HashSet;
 @RequiredArgsConstructor
 @ToString
 public class CommunicationModel {
+    private static final String NOT_SET = "not-set";
+
     /**
      * Identifier for the current project, e.g. gitlab project id
      */
@@ -58,11 +60,17 @@ public class CommunicationModel {
     @SerializedName(value = "sqs_consumers")
     private Collection<SqsConsumer> sqsConsumers = new HashSet<>();
 
+    /**
+     * All SQS producers.
+     */
+    @SerializedName(value = "sqs_producers")
+    private Collection<SqsProducer> sqsProducers = new HashSet<>();
+
     private CommunicationModel() {
         // for GSON deserialize
-        projectId = "not-set";
-        projectName = "not-set";
-        modelVersion = "not-set";
+        projectId = NOT_SET;
+        projectName = NOT_SET;
+        modelVersion = NOT_SET;
     }
 
     public <T extends ISenderReceiverCommunication> void addSenderReceiver(T endpoint) {
@@ -74,6 +82,8 @@ public class CommunicationModel {
             jmsConsumers.add((JmsReceiver) endpoint);
         } else if (endpoint instanceof SqsConsumer) {
             sqsConsumers.add((SqsConsumer) endpoint);
+        } else if (endpoint instanceof SqsProducer) {
+            sqsProducers.add((SqsProducer) endpoint);
         } else {
             throw new IllegalStateException(String.format("We have no endpoints of type %s", endpoint.getClass().getCanonicalName()));
         }
@@ -86,5 +96,6 @@ public class CommunicationModel {
         httpProducers.forEach(e -> e.visit(visitor));
         jmsConsumers.forEach(e -> e.visit(visitor));
         sqsConsumers.forEach(e -> e.visit(visitor));
+        sqsProducers.forEach(e -> e.visit(visitor));
     }
 }

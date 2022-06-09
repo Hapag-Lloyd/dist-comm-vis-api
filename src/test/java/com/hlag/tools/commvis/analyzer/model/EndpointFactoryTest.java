@@ -68,4 +68,14 @@ class EndpointFactoryTest {
         Assertions.assertThat(actualSqsConsumer.getId()).isEqualTo(FIXED_ID);
     }
 
+    @Test
+    void shouldSetAllFields_whenCreateSqsProducer() {
+        SqsProducer actualSqsProducer = factory.createSqsProducer("className", "methodName", "destinationProjectId", "queueName");
+
+        Assertions.assertThat(actualSqsProducer.getClassName()).isEqualTo("className");
+        Assertions.assertThat(actualSqsProducer.getMethodName()).isEqualTo("methodName");
+        Assertions.assertThat(actualSqsProducer.getQueueName()).isEqualTo("queueName");
+        Assertions.assertThat(actualSqsProducer.getDestinationProjectId()).isEqualTo("destinationProjectId");
+        Assertions.assertThat(actualSqsProducer.getId()).isEqualTo(FIXED_ID);
+    }
 }
