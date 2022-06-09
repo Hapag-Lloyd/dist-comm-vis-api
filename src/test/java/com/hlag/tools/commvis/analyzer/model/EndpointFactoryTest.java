@@ -1,5 +1,7 @@
 package com.hlag.tools.commvis.analyzer.model;
 
+import com.hlag.tools.commvis.analyzer.annotation.VisualizeSnsProducer;
+import com.hlag.tools.commvis.analyzer.annotation.VisualizeSqsViaSnsConsumer;
 import com.hlag.tools.commvis.analyzer.port.IIdentityGenerator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +13,14 @@ import org.mockito.MockitoAnnotations;
 
 class EndpointFactoryTest {
     private static final String FIXED_ID = "MY-UNIQUE-ID";
+
+    private static class TestProducersAndConsumers {
+        @VisualizeSnsProducer(topicName = "topic", projectId = "4711")
+        public void produceSnsMessage() {}
+
+        @VisualizeSqsViaSnsConsumer(topicName = "topic1", projectName = "4712")
+        public void consumeSqsViaSnsMessage() {}
+    }
 
     @Mock
     private IIdentityGenerator identityGenerator;
@@ -77,5 +87,26 @@ class EndpointFactoryTest {
         Assertions.assertThat(actualSqsProducer.getQueueName()).isEqualTo("queueName");
         Assertions.assertThat(actualSqsProducer.getDestinationProjectId()).isEqualTo("destinationProjectId");
         Assertions.assertThat(actualSqsProducer.getId()).isEqualTo(FIXED_ID);
+    }
+
+    @Test
+    void shouldSetAllFields_whenCreateSnsProducer() throws NoSuchMethodException {
+        SnsProducer actualSnsProducer = factory.createSnsProducer(TestProducersAndConsumers.class.getDeclaredMethod("produceSnsMessage").getAnnotationsByType(VisualizeSnsProducer.class)[0], TestProducersAndConsumers.class.getDeclaredMethod("produceSnsMessage"));
+
+        Assertions.assertThat(actualSnsProducer.getClassName()).isEqualTo("com.hlag.tools.commvis.analyzer.model.EndpointFactoryTest.TestProducersAndConsumers");
+        Assertions.assertThat(actualSnsProducer.getMethodName()).isEqualTo("produceSnsMessage");
+        Assertions.assertThat(actualSnsProducer.getTopicName()).isEqualTo("topic");
+        Assertions.assertThat(actualSnsProducer.getDestinationProjectId()).isEqualTo("4711");
+        Assertions.assertThat(actualSnsProducer.getId()).isEqualTo(FIXED_ID);
+    }
+
+    @Test
+    void shouldSetAllFields_whenCreateSqsViaSnsConsumer() throws NoSuchMethodException {
+        SqsViaSnsConsumer actualSqsViaSnsConsumer = factory.createSqsViaSnsConsumer(TestProducersAndConsumers.class.getDeclaredMethod("consumeSqsViaSnsMessage").getAnnotationsByType(VisualizeSqsViaSnsConsumer.class)[0], TestProducersAndConsumers.class.getDeclaredMethod("consumeSqsViaSnsMessage"));
+
+        Assertions.assertThat(actualSqsViaSnsConsumer.getClassName()).isEqualTo("com.hlag.tools.commvis.analyzer.model.EndpointFactoryTest.TestProducersAndConsumers");
+        Assertions.assertThat(actualSqsViaSnsConsumer.getMethodName()).isEqualTo("consumeSqsViaSnsMessage");
+        Assertions.assertThat(actualSqsViaSnsConsumer.getTopicName()).isEqualTo("topic1");
+        Assertions.assertThat(actualSqsViaSnsConsumer.getId()).isEqualTo(FIXED_ID);
     }
 }

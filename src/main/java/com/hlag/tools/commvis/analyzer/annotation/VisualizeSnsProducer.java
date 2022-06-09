@@ -1,21 +1,18 @@
 package com.hlag.tools.commvis.analyzer.annotation;
 
-import com.google.gson.annotations.SerializedName;
-import com.hlag.tools.commvis.analyzer.model.AbstractCommunicationModelVisitor;
-
 import java.lang.annotation.*;
 
 /**
- * Marks a producer for AWS SQS messages.
+ * Marks a producer for AWS SNS messages.
  */
-@Repeatable(VisualizeSqsProducers.class)
+@Repeatable(VisualizeSnsProducers.class)
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface VisualizeSqsProducer {
+public @interface VisualizeSnsProducer {
     /**
-     * @return name of the SQS queue messages are sent to
+     * @return name of the SNS topic messages are sent to
      */
-    String queueName();
+    String topicName();
 
     /**
      * @return the id of the project called, usually the Gitlab project id or similar

@@ -9,7 +9,7 @@ This project contains some API classes to allow users to define their own scanne
 <dependency>
     <groupId>com.hlag.tools.commvis</groupId>
     <artifactId>api</artifactId>
-    <version>2.5.5</version>
+    <version>2.7.0</version>
     <scope>provided</scope>
 </dependency>
 ```

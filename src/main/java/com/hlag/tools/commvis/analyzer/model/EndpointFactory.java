@@ -1,8 +1,12 @@
 package com.hlag.tools.commvis.analyzer.model;
 
+import com.hlag.tools.commvis.analyzer.annotation.VisualizeSnsProducer;
+import com.hlag.tools.commvis.analyzer.annotation.VisualizeSqsViaSnsConsumer;
 import com.hlag.tools.commvis.analyzer.port.IIdentityGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.lang.reflect.Method;
 
 @Component
 @RequiredArgsConstructor
@@ -25,7 +29,15 @@ public class EndpointFactory {
         return new SqsConsumer(className, methodName, queueName, identityGenerator.generateUniqueId());
     }
 
+    public SqsViaSnsConsumer createSqsViaSnsConsumer(VisualizeSqsViaSnsConsumer annotation, Method method) {
+        return new SqsViaSnsConsumer(method.getDeclaringClass().getCanonicalName(), method.getName(), annotation.topicName(), identityGenerator.generateUniqueId());
+    }
+
     public SqsProducer createSqsProducer(String className, String methodName, String queueName, String destinationProjectId) {
         return new SqsProducer(className, methodName, queueName, destinationProjectId, identityGenerator.generateUniqueId());
+    }
+
+    public SnsProducer createSnsProducer(VisualizeSnsProducer annotation, Method method) {
+        return new SnsProducer(method.getDeclaringClass().getCanonicalName(), method.getName(), annotation.topicName(), annotation.projectId(), identityGenerator.generateUniqueId());
     }
 }
