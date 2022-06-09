@@ -24,4 +24,8 @@ public class EndpointFactory {
     public SqsConsumer createSqsReceiver(String className, String methodName, String queueName) {
         return new SqsConsumer(className, methodName, queueName, identityGenerator.generateUniqueId());
     }
+
+    public SqsProducer createSqsProducer(String className, String methodName, String queueName, String destinationProjectId) {
+        return new SqsProducer(className, methodName, queueName, destinationProjectId, identityGenerator.generateUniqueId());
+    }
 }

@@ -4,6 +4,15 @@
 This project contains some API classes to allow users to define their own scanners. This way the 
 [Distributed Communication Visualizer](https://github.com/Hapag-Lloyd/dist-comm-vis) can be extended.
 
+# Maven Dependency
+```
+<dependency>
+    <groupId>com.hlag.tools.commvis</groupId>
+    <artifactId>api</artifactId>
+    <version>2.5.5</version>
+    <scope>provided</scope>
+</dependency>
+```
 ## Writing A User-Defined Scanner
 Before writing your own/private scanner: If you are solving a general use cases, please think about
 contributing to https://github.com/Hapag-Lloyd/dist-comm-vis to help the community. Thanks!

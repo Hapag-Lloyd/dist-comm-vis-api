@@ -7,10 +7,10 @@ import java.lang.reflect.Field;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class SqsConsumerTest {
+class SqsProducerTest {
     @Test
     void shouldHaveSerializedNameAnnotationOnFiled_toDecoupleTheFieldNameFromJson() {
-        Field[] declaredFields = SqsConsumer.class.getDeclaredFields();
+        Field[] declaredFields = SqsProducer.class.getDeclaredFields();
 
         for (Field f : declaredFields) {
             SerializedName actualAnnotation = f.getAnnotation(SerializedName.class);
