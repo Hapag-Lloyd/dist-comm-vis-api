@@ -66,6 +66,12 @@ public class CommunicationModel {
     @SerializedName(value = "sqs_producers")
     private Collection<SqsProducer> sqsProducers = new HashSet<>();
 
+    /**
+     * All SNS producers.
+     */
+    @SerializedName(value = "sns_producers")
+    private Collection<SnsProducer> snsProducers = new HashSet<>();
+
     private CommunicationModel() {
         // for GSON deserialize
         projectId = NOT_SET;
@@ -84,6 +90,8 @@ public class CommunicationModel {
             sqsConsumers.add((SqsConsumer) endpoint);
         } else if (endpoint instanceof SqsProducer) {
             sqsProducers.add((SqsProducer) endpoint);
+        } else if (endpoint instanceof SnsProducer) {
+            snsProducers.add((SnsProducer) endpoint);
         } else {
             throw new IllegalStateException(String.format("We have no endpoints of type %s", endpoint.getClass().getCanonicalName()));
         }
@@ -97,5 +105,6 @@ public class CommunicationModel {
         jmsConsumers.forEach(e -> e.visit(visitor));
         sqsConsumers.forEach(e -> e.visit(visitor));
         sqsProducers.forEach(e -> e.visit(visitor));
+        snsProducers.forEach(e -> e.visit(visitor));
     }
 }
