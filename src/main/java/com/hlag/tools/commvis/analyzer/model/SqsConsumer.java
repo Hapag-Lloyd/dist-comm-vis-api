@@ -10,7 +10,7 @@ import lombok.Value;
  */
 @Value
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
-public class SqsConsumer implements ISenderReceiverCommunication {
+public class SqsConsumer implements ISenderReceiverCommunication, IConsumer {
     @SerializedName(value="class_name")
     String className;
 
@@ -26,5 +26,16 @@ public class SqsConsumer implements ISenderReceiverCommunication {
     @Override
     public void visit(AbstractCommunicationModelVisitor visitor) {
         visitor.visit(this);
+    }
+
+    @Override
+    public boolean isProducedBy(IProducer producer) {
+        if (producer instanceof SqsProducer) {
+            SqsProducer sqsProducer = (SqsProducer) producer;
+
+            return queueName.equals(sqsProducer.getQueueName());
+        }
+
+        return false;
     }
 }

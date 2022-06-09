@@ -10,7 +10,7 @@ import java.util.UUID;
  */
 @Value
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
-public class HttpConsumer implements ISenderReceiverCommunication {
+public class HttpConsumer implements ISenderReceiverCommunication, IConsumer {
     @SerializedName(value="class_name")
     String className;
     @SerializedName(value="method_name")
@@ -24,13 +24,15 @@ public class HttpConsumer implements ISenderReceiverCommunication {
     @SerializedName(value="id")
     String id;
 
-    /**
-     *
-     * @param producer the producer tested
-     * @return {@code true} if this consumer is receives messages from the {@code producer}.
-     */
-    public boolean isProducedBy(HttpProducer producer) {
-        return type.equals(producer.getType()) && path.equals(producer.getPath());
+    @Override
+    public boolean isProducedBy(IProducer producer) {
+        if (producer instanceof HttpProducer) {
+            HttpProducer httpProducer = (HttpProducer) producer;
+
+            return type.equals(httpProducer.getType()) && path.equals(httpProducer.getPath());
+        }
+
+        return false;
     }
 
     @Override
