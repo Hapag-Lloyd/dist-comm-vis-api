@@ -10,12 +10,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 class HttpProducerTest {
     @Test
     void shouldHaveSerializedNameAnnotationOnFiled_toDecoupleTheFieldNameFromJson() {
-        Field[] declaredFields = CommunicationModel.class.getDeclaredFields();
+        Field[] declaredFields = HttpProducer.class.getDeclaredFields();
 
         for (Field f : declaredFields) {
             SerializedName actualAnnotation = f.getAnnotation(SerializedName.class);
 
-            assertThat(actualAnnotation).isNotNull();
+            assertThat(actualAnnotation).withFailMessage(() -> String.format("Field %s has no @SerializedName annotation.", f.getName())).isNotNull();
         }
     }
 }

@@ -70,7 +70,7 @@ class EndpointFactoryTest {
 
     @Test
     void shouldSetAllFields_whenCreateSqsProducer() {
-        SqsProducer actualSqsProducer = factory.createSqsProducer("className", "methodName", "destinationProjectId", "queueName");
+        SqsProducer actualSqsProducer = factory.createSqsProducer("className", "methodName", "queueName", "destinationProjectId");
 
         Assertions.assertThat(actualSqsProducer.getClassName()).isEqualTo("className");
         Assertions.assertThat(actualSqsProducer.getMethodName()).isEqualTo("methodName");
