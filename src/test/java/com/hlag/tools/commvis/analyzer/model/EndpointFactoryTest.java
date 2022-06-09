@@ -1,6 +1,7 @@
 package com.hlag.tools.commvis.analyzer.model;
 
 import com.hlag.tools.commvis.analyzer.annotation.VisualizeSnsProducer;
+import com.hlag.tools.commvis.analyzer.annotation.VisualizeSqsViaSnsConsumer;
 import com.hlag.tools.commvis.analyzer.port.IIdentityGenerator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,8 +16,10 @@ class EndpointFactoryTest {
 
     private static class TestProducersAndConsumers {
         @VisualizeSnsProducer(topicName = "topic", projectId = "4711")
-        public void produceSnsMessage() {
-        }
+        public void produceSnsMessage() {}
+
+        @VisualizeSqsViaSnsConsumer(topicName = "topic1", projectName = "4712")
+        public void consumeSqsViaSnsMessage() {}
     }
 
     @Mock
@@ -95,5 +98,15 @@ class EndpointFactoryTest {
         Assertions.assertThat(actualSnsProducer.getTopicName()).isEqualTo("topic");
         Assertions.assertThat(actualSnsProducer.getDestinationProjectId()).isEqualTo("4711");
         Assertions.assertThat(actualSnsProducer.getId()).isEqualTo(FIXED_ID);
+    }
+
+    @Test
+    void shouldSetAllFields_whenCreateSqsViaSnsConsumer() throws NoSuchMethodException {
+        SqsViaSnsConsumer actualSqsViaSnsConsumer = factory.createSqsViaSnsConsumer(TestProducersAndConsumers.class.getDeclaredMethod("consumeSqsViaSnsMessage").getAnnotationsByType(VisualizeSqsViaSnsConsumer.class)[0], TestProducersAndConsumers.class.getDeclaredMethod("consumeSqsViaSnsMessage"));
+
+        Assertions.assertThat(actualSqsViaSnsConsumer.getClassName()).isEqualTo("com.hlag.tools.commvis.analyzer.model.EndpointFactoryTest.TestProducersAndConsumers");
+        Assertions.assertThat(actualSqsViaSnsConsumer.getMethodName()).isEqualTo("consumeSqsViaSnsMessage");
+        Assertions.assertThat(actualSqsViaSnsConsumer.getTopicName()).isEqualTo("topic1");
+        Assertions.assertThat(actualSqsViaSnsConsumer.getId()).isEqualTo(FIXED_ID);
     }
 }

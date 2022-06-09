@@ -61,6 +61,12 @@ public class CommunicationModel {
     private Collection<SqsConsumer> sqsConsumers = new HashSet<>();
 
     /**
+     * All SQS via SNS consumers.
+     */
+    @SerializedName(value = "sqs_via_sns_consumers")
+    private Collection<SqsViaSnsConsumer> sqsViaSnsConsumers = new HashSet<>();
+
+    /**
      * All SQS producers.
      */
     @SerializedName(value = "sqs_producers")
@@ -92,6 +98,8 @@ public class CommunicationModel {
             sqsProducers.add((SqsProducer) endpoint);
         } else if (endpoint instanceof SnsProducer) {
             snsProducers.add((SnsProducer) endpoint);
+        } else if (endpoint instanceof SqsViaSnsConsumer) {
+            sqsViaSnsConsumers.add((SqsViaSnsConsumer) endpoint);
         } else {
             throw new IllegalStateException(String.format("We have no endpoints of type %s", endpoint.getClass().getCanonicalName()));
         }
@@ -106,5 +114,6 @@ public class CommunicationModel {
         sqsConsumers.forEach(e -> e.visit(visitor));
         sqsProducers.forEach(e -> e.visit(visitor));
         snsProducers.forEach(e -> e.visit(visitor));
+        sqsViaSnsConsumers.forEach(e -> e.visit(visitor));
     }
 }
