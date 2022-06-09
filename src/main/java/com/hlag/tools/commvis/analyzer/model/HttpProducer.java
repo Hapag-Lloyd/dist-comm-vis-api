@@ -10,7 +10,7 @@ import java.util.UUID;
  */
 @Value
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
-public class HttpProducer implements ISenderReceiverCommunication {
+public class HttpProducer implements ISenderReceiverCommunication, IProducer {
     /**
      * The full qualified classname where the producer lives.
      */

@@ -10,7 +10,7 @@ import java.util.UUID;
  */
 @Value
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
-public class JmsReceiver implements ISenderReceiverCommunication {
+public class JmsReceiver implements ISenderReceiverCommunication, IConsumer {
     @SerializedName(value="class_name")
     String className;
 
@@ -28,5 +28,11 @@ public class JmsReceiver implements ISenderReceiverCommunication {
     @Override
     public void visit(AbstractCommunicationModelVisitor visitor) {
         visitor.visit(this);
+    }
+
+    @Override
+    public boolean isProducedBy(IProducer producer) {
+        // we have no producers so far
+        return false;
     }
 }

@@ -10,7 +10,7 @@ import lombok.Value;
  */
 @Value
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
-public class SqsProducer  implements ISenderReceiverCommunication {
+public class SqsProducer implements ISenderReceiverCommunication, IProducer {
     /**
      * the class name where the producer was found.
      */
