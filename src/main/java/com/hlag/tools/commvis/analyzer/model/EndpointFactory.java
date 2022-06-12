@@ -1,5 +1,7 @@
 package com.hlag.tools.commvis.analyzer.model;
 
+import com.hlag.tools.commvis.analyzer.annotation.VisualizeKafkaConsumer;
+import com.hlag.tools.commvis.analyzer.annotation.VisualizeKafkaProducer;
 import com.hlag.tools.commvis.analyzer.annotation.VisualizeSnsProducer;
 import com.hlag.tools.commvis.analyzer.annotation.VisualizeSqsViaSnsConsumer;
 import com.hlag.tools.commvis.analyzer.port.IIdentityGenerator;
@@ -39,5 +41,13 @@ public class EndpointFactory {
 
     public SnsProducer createSnsProducer(VisualizeSnsProducer annotation, Method method) {
         return new SnsProducer(method.getDeclaringClass().getCanonicalName(), method.getName(), annotation.topicName(), annotation.projectId(), identityGenerator.generateUniqueId());
+    }
+
+    public KafkaProducer createKafkaProducer(VisualizeKafkaProducer annotation, Method method) {
+        return new KafkaProducer(method.getDeclaringClass().getCanonicalName(), method.getName(), annotation.topicName(), annotation.projectId(), identityGenerator.generateUniqueId());
+    }
+
+    public KafkaConsumer createKafkaConsumer(VisualizeKafkaConsumer annotation, Method method) {
+        return new KafkaConsumer(method.getDeclaringClass().getCanonicalName(), method.getName(), annotation.topicName(), identityGenerator.generateUniqueId());
     }
 }

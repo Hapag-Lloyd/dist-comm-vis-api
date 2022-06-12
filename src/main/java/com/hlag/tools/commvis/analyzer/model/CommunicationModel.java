@@ -78,6 +78,18 @@ public class CommunicationModel {
     @SerializedName(value = "sns_producers")
     private Collection<SnsProducer> snsProducers = new HashSet<>();
 
+    /**
+     * All SNS producers.
+     */
+    @SerializedName(value = "kafka_producers")
+    private Collection<KafkaProducer> kafkaProducers = new HashSet<>();
+
+    /**
+     * All SQS consumers.
+     */
+    @SerializedName(value = "kafka_consumers")
+    private Collection<KafkaConsumer> kafkaConsumers = new HashSet<>();
+
     private CommunicationModel() {
         // for GSON deserialize
         projectId = NOT_SET;
@@ -100,6 +112,10 @@ public class CommunicationModel {
             snsProducers.add((SnsProducer) endpoint);
         } else if (endpoint instanceof SqsViaSnsConsumer) {
             sqsViaSnsConsumers.add((SqsViaSnsConsumer) endpoint);
+        } else if (endpoint instanceof KafkaProducer) {
+            kafkaProducers.add((KafkaProducer) endpoint);
+        } else if (endpoint instanceof KafkaConsumer) {
+            kafkaConsumers.add((KafkaConsumer) endpoint);
         } else {
             throw new IllegalStateException(String.format("We have no endpoints of type %s", endpoint.getClass().getCanonicalName()));
         }
@@ -115,5 +131,7 @@ public class CommunicationModel {
         sqsProducers.forEach(e -> e.visit(visitor));
         snsProducers.forEach(e -> e.visit(visitor));
         sqsViaSnsConsumers.forEach(e -> e.visit(visitor));
+        kafkaProducers.forEach(e -> e.visit(visitor));
+        kafkaConsumers.forEach(e -> e.visit(visitor));
     }
 }
