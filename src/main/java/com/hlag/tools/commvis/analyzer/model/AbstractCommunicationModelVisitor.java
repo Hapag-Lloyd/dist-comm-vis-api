@@ -16,4 +16,7 @@ public abstract class AbstractCommunicationModelVisitor {
     public abstract void visit(SqsProducer sqsProducer);
 
     public abstract void visit(SnsProducer snsProducer);
+
+    public abstract void visit(KafkaProducer kafkaProducer);
+    public abstract void visit(KafkaConsumer kafkaConsumer);
 }
