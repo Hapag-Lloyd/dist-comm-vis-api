@@ -13,7 +13,7 @@ class KafkaConsumerTest {
 
     @BeforeEach
     void init() {
-        kafkaConsumer = new KafkaConsumer("class", "method", "queue", "id");
+        kafkaConsumer = new KafkaConsumer("class", "method", "topic", "id");
     }
     @Test
     void shouldHaveSerializedNameAnnotationOnFiled_toDecoupleTheFieldNameFromJson() {
