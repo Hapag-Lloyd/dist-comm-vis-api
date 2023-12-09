@@ -37,4 +37,4 @@ jobs:
           SERVER_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
           GPG_PRIVATE_KEY: ${{ secrets.GPG_SIGNING_KEY }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-        run: mvn --version && ls -la /opt/hostedtoolcache/ && unset GITHUB_ACTIONS && npx --prefix .release/ semantic-release --dry-run --no-ci --debug
+        run: mvn --version && ls -la /usr/lib/jvm/ && unset GITHUB_ACTIONS && npx --prefix .release/ semantic-release --dry-run --no-ci --debug
