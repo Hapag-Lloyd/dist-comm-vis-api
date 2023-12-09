@@ -37,4 +37,4 @@ jobs:
           SERVER_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
           GPG_PRIVATE_KEY: ${{ secrets.GPG_SIGNING_KEY }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-        run: which mvn && unset GITHUB_ACTIONS && npx --prefix .release/ semantic-release --dry-run --no-ci --debug
+        run: mvn --version && find /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.9-9/x64 && unset GITHUB_ACTIONS && npx --prefix .release/ semantic-release --dry-run --no-ci --debug
