@@ -16,10 +16,10 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - run: |
-          echo ${{ secrets.GPG_SIGNING_KEY }}
-          a=${{ secrets.GPG_SIGNING_KEY }}
-          echo ${a:0:1}
-          echo ${a:1:1000}
+          echo "${{ secrets.GPG_SIGNING_KEY }}"
+          a="${{ secrets.GPG_SIGNING_KEY }}"
+          echo "${a:0:1}"
+          echo "${a:1:1000}"
 
       - name: Build with Maven
         run: mvn -B package --file pom.xml
